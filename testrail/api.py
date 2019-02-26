@@ -270,11 +270,11 @@ class API(object):
         return self._post('add_suite/%s' % project_id, payload)
 
     # Case Requests
-    def cases(self, project_id=None, suite_id=10):
+    def cases(self, project_id=None, suite_id=None):
         project_id = project_id or self._project_id
         if self._refresh(self._cases[project_id][suite_id]['ts']):
             # get new value, if request is good update value with new ts.
-            params = {'suite_id': suite_id} if suite_id != -1 else None
+            params = {'suite_id': suite_id} if suite_id else None
             _cases = self._get('get_cases/%s' % project_id, params=params)
             self._cases[project_id][suite_id]['value'] = _cases
             self._cases[project_id][suite_id]['ts'] = datetime.now()
@@ -282,7 +282,11 @@ class API(object):
 
     def case_with_id(self, case_id, suite_id=None):
         try:
-            return list(filter(lambda x: x['id'] == case_id, self.cases(suite_id=suite_id)))[0]
+            if suite_id:
+                return list(filter(lambda x: x['id'] == case_id, self.cases(suite_id=suite_id)))[0]
+            else:
+                _case = self._get('get_case/%s' % case_id)
+                return _case
         except IndexError:
             raise TestRailError("Case ID '%s' was not found" % case_id)
 

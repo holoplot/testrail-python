@@ -283,7 +283,9 @@ class TestRail(object):
     @singleresult
     def _case_by_id(self, case_id, suite=None):
         if suite is None:
-            pass
+            case = []
+            case.append(Case(self.api.case_with_id(case_id)))
+            return case
         else:
             return filter(lambda c: c.id == case_id, self.cases(suite))
 
