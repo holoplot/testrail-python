@@ -13,14 +13,14 @@ if sys.version_info[:3] < (2, 7, 0):
     install_requires.append('ordereddict')
 
 setup(
-    name='testrail',
+    name='trapi',
     packages=['testrail'],
     version='0.3.12',
     description='Python library for interacting with TestRail via REST APIs.',
-    author='Travis Pavek',
-    author_email='travis.pavek@gmail.com',
-    url='https://github.com/travispavek/testrail-python',
-    download_url='https://github.com/travispavek/testrail-python/tarball/0.3.12',
+    author='Travis Pavek, Luis Suarez',
+    author_email='travis.pavek@gmail.com, luis.suarez@holoplot.com',
+    url='https://github.com/holoplot/trapi',
+    download_url='https://github.com/holoplot/trapi/tarball/0.3.12',
     keywords=['testrail', 'api', 'client', 'library', 'rest'],
     install_requires=install_requires,
     classifiers=[
